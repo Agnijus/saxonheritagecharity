@@ -6,14 +6,7 @@ import com.example.saxonheritage.services.GlobalCustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.Queue;
-import javax.jms.Session;
-import javax.jms.TextMessage;
+import javax.jms.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +24,7 @@ public class CustomMessageConsumer {
     private Queue benefitsQueue;
     private List<String> receivedPromotions;
     private Map<String, List<String>> receivedVisitorReports = new HashMap<>();
-    private Map<Integer, Map<String, String>> receivedBenefits = new ConcurrentHashMap<>();
+    Map<String, Map<String, String>> receivedBenefits;
 
     @Autowired
     private MyMongoClient myMongoClient;
@@ -100,8 +93,6 @@ public class CustomMessageConsumer {
         connection.start();
     }
 
-
-
     public void startListeningToPromotions() throws JMSException {
         Connection connection = connectionFactory.createConnection();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -111,18 +102,14 @@ public class CustomMessageConsumer {
         consumer.setMessageListener(new MessageListener() {
             @Override
             public void onMessage(Message message) {
-                if (message instanceof TextMessage) {
-                    TextMessage textMessage = (TextMessage) message;
+                if (message instanceof MapMessage) {
+                    MapMessage mapMessage = (MapMessage) message;
                     try {
-                        String promotionText = textMessage.getText();
-                        System.out.println("Received promotion: " + promotionText);
+                        String memberId = mapMessage.getString("memberId");
+                        String promotion = mapMessage.getString("promotion");
+                        System.out.println("Received promotion: Member ID: " + memberId + ", Promotion: " + promotion);
 
-                        // Extract memberId and promotion from the received message
-                        String[] parts = promotionText.split(", ");
-                        String memberIdPart = parts[0].replace("Member ID: ", "");
-                        String promotionPart = parts[1].replace("Promotion: ", "");
-
-                        myMongoClient.insertPromotion(memberIdPart, promotionPart);
+                        myMongoClient.insertPromotion(memberId, promotion);
                     } catch (JMSException | GlobalCustomException e) {
                         e.printStackTrace();
                     }
@@ -132,6 +119,7 @@ public class CustomMessageConsumer {
 
         connection.start();
     }
+
 
     public void startListeningToBenefits() throws JMSException {
         Connection connection = connectionFactory.createConnection();
@@ -150,7 +138,7 @@ public class CustomMessageConsumer {
 
                         // Extract member ID and benefit from the benefit message
                         String[] benefitParts = benefitMessage.split(", ");
-                        int memberId = Integer.parseInt(benefitParts[0].split(": ")[1]);
+                        String memberId = benefitParts[0].split(": ")[1];
                         String benefit = benefitParts[1].split(": ")[1];
 
                         // Check if the benefit is being added or removed

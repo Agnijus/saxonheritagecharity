@@ -49,6 +49,7 @@ public class CustomMessageProducer {
     }
 
 
+
     public void sendBenefitUpdate(String benefitMessage, boolean isAdding) throws JMSException {
         Connection connection = connectionFactory.createConnection();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
