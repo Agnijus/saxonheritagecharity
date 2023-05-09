@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<header>
+    <nav>
+        <ul class="nav-left">
+            <li><a href="/" class="nav-link">Home</a></li>
+        </ul>
+        <ul class="nav-right">
+            <li><a href="/memberAccount.html" class="nav-link">Account</a></li>
+            <li><a href="/memberBenefits.html" class="nav-link">Benefits</a></li>
+            <li><a href="/visitorReports.html" class="nav-link">Visitor Cards</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <!-- Member Administration-->
+
+    <div class="form-container">
+        <h2>Register Member</h2>
+        <form id="register-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required />
+            <label for="email">Email:</label>
+            <input type="email" id="email" required />
+            <button type="submit">Register</button>
+        </form>
+        <div id="register-result"></div>
+    </div>
+
+    <div class="form-container">
+        <h2>Update Member Details</h2>
+        <form id="update-form">
+            <label for="member-id">Member ID:</label>
+            <input type="text" id="member-id" required />
+            <label for="new-email">New Email:</label>
+            <input type="email" id="new-email" required />
+            <button type="submit">Update</button>
+        </form>
+        <div id="update-result"></div>
+    </div>
+
+    <div class="form-container">
+        <h2>Get Membership Info</h2>
+        <form id="info-form">
+            <label for="info-member-id">Member ID:</label>
+            <input type="text" id="info-member-id" required />
+            <button type="submit">Get Info</button>
+        </form>
+        <div id="info-result"></div>
+    </div>
+</main>
+<script src="script.js"></script>
+
+</body>>
+</html>

@@ -1,0 +1,76 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.saxonheritage.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://jaxb.dev.java.net/array" name="BenefitsServiceImplService" targetNamespace="http://services.saxonheritage.example.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://jaxb.dev.java.net/array" version="1.0">
+            <xs:complexType final="#all" name="stringArray">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="removeBenefit">
+        <wsdl:part name="memberId" type="xsd:int"> </wsdl:part>
+        <wsdl:part name="benefit" type="xsd:string"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMemberBenefitsResponse">
+        <wsdl:part name="return" type="ns1:stringArray"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMemberBenefits">
+        <wsdl:part name="memberId" type="xsd:int"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addBenefit">
+        <wsdl:part name="memberId" type="xsd:int"> </wsdl:part>
+        <wsdl:part name="benefit" type="xsd:string"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removeBenefitResponse"> </wsdl:message>
+    <wsdl:message name="addBenefitResponse"> </wsdl:message>
+    <wsdl:portType name="BenefitsService">
+        <wsdl:operation name="addBenefit">
+            <wsdl:input message="tns:addBenefit" name="addBenefit"> </wsdl:input>
+            <wsdl:output message="tns:addBenefitResponse" name="addBenefitResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="removeBenefit">
+            <wsdl:input message="tns:removeBenefit" name="removeBenefit"> </wsdl:input>
+            <wsdl:output message="tns:removeBenefitResponse" name="removeBenefitResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMemberBenefits">
+            <wsdl:input message="tns:getMemberBenefits" name="getMemberBenefits"> </wsdl:input>
+            <wsdl:output message="tns:getMemberBenefitsResponse" name="getMemberBenefitsResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BenefitsServiceImplServiceSoapBinding" type="tns:BenefitsService">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="addBenefit">
+            <soap:operation soapAction="" style="rpc"/>
+            <wsdl:input name="addBenefit">
+                <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="addBenefitResponse">
+                <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="removeBenefit">
+            <soap:operation soapAction="" style="rpc"/>
+            <wsdl:input name="removeBenefit">
+                <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="removeBenefitResponse">
+                <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMemberBenefits">
+            <soap:operation soapAction="" style="rpc"/>
+            <wsdl:input name="getMemberBenefits">
+                <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getMemberBenefitsResponse">
+                <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BenefitsServiceImplService">
+        <wsdl:port binding="tns:BenefitsServiceImplServiceSoapBinding" name="BenefitsServiceImplPort">
+            <soap:address location="http://localhost:8080/soap-api/benefitsService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

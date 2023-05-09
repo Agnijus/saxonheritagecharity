@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<script src="script.js" defer></script>
+
+<header>
+    <nav>
+        <ul class="nav-left">
+            <li><a href="/" class="nav-link">Home</a></li>
+        </ul>
+        <ul class="nav-right">
+            <li><a href="/memberAccount.html" class="nav-link">Account</a></li>
+            <li><a href="/memberBenefits.html" class="nav-link">Benefits</a></li>
+            <li><a href="/visitorReports.html" class="nav-link">Visitor Cards</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <style>
+        #visitor-report-result {
+            margin-top: 1rem;
+        }
+        #visitor-report-result ul {
+            list-style-type: disc;
+            margin-left: 1rem;
+            padding-left: 0;
+        }
+
+        #visitor-report-result li {
+            margin-bottom: 0.5rem;
+        }
+
+        .visitor-report-form-wrapper label {
+            margin-right: 0.5rem;
+        }
+
+        .visitor-report-form-wrapper input[type="text"] {
+            margin-right: 0.5rem;
+        }
+
+
+    </style>
+    <!--Visitor Reports-->
+
+    <h2>Submit Visitor Report</h2>
+    <form id="report-form">
+        <label for="report-member-id">Member ID:</label>
+        <input type="text" id="report-member-id" required>
+        <label for="visitor-report">Visitor Report:</label>
+        <textarea id="visitor-report" required></textarea>
+        <button type="submit">Submit Report</button>
+    </form>
+    <div id="report-result"></div>
+
+    <h2>Get Visitor Reports</h2>
+    <form id="visitor-report-form">
+        <label for="visitor-report-member-id">Member ID:</label>
+        <input type="text" id="visitor-report-member-id" required>
+        <button type="submit">Get Reports</button>
+    </form>
+    <div id="visitor-report-result"></div>
+</main>
+<script>
+    class GlobalCustomException extends Error {
+        constructor(message, statusCode) {
+            super(message);
+            this.statusCode = statusCode;
+        }
+    }
+    // Member Insert Visitor Report
+    document.getElementById("report-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const memberId = document.getElementById("report-member-id").value;
+        const visitorReport = document.getElementById("visitor-report").value;
+
+        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+    <soapenv:Header/>
+    <soapenv:Body>
+      <ser:submitVisitorReport>
+        <ser:arg0>${memberId}</ser:arg0>
+        <ser:arg1>
+          <item>${visitorReport}</item>
+        </ser:arg1>
+      </ser:submitVisitorReport>
+    </soapenv:Body>
+  </soapenv:Envelope>`;
+
+        const responseElement = document.getElementById("report-result");
+        try {
+            const response = await fetch("/soap-api/memberService", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/xml",
+                },
+                body: requestBody,
+            });
+
+            if (response.ok) {
+                responseElement.textContent = "Visitor report submitted successfully.";
+            } else {
+                const responseText = await response.text();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(responseText, "text/xml");
+                const faultCode = xmlDoc.getElementsByTagName("faultcode")[0]?.textContent;
+                const faultString = xmlDoc.getElementsByTagName("faultstring")[0]?.textContent;
+                if (faultCode === "soap:Server" && faultString.startsWith("Member not found")) {
+                    throw new GlobalCustomException("Member not found.", 404);
+                }
+                responseElement.innerHTML = `<pre>${faultString}</pre>`;
+            }
+        } catch (error) {
+            if (error instanceof GlobalCustomException) {
+                responseElement.textContent = `${error.message}`;
+                console.log(error);
+            } else {
+                responseElement.textContent = `${error.message}`;
+            }
+        }
+    });
+
+
+
+
+
+    // Member Get Visitor Reports
+    document.getElementById("visitor-report-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const memberId = document.getElementById("visitor-report-member-id").value;
+
+        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+<soapenv:Header/>
+<soapenv:Body>
+    <ser:getVisitorReports>
+        <ser:arg0>${memberId}</ser:arg0>
+    </ser:getVisitorReports>
+</soapenv:Body>
+</soapenv:Envelope>`;
+
+        const responseElement = document.getElementById("visitor-report-result");
+        try {
+            const response = await fetch("/soap-api/memberService", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/xml"
+                },
+                body: requestBody
+            });
+
+            const responseText = await response.text();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(responseText, "text/xml");
+
+            if (response.ok) {
+                const reports = xmlDoc.getElementsByTagName("item");
+                let result = "<ul>";
+                for (let i = 0; i < reports.length; i++) {
+                    let reportText = reports[i].textContent.trim();
+                    if (reportText !== "") {
+                        result += `<li>${reportText}</li>`;
+                    }
+                }
+                result += "</ul>";
+                responseElement.innerHTML = result;
+            } else {
+                const faultString = xmlDoc.getElementsByTagName("faultstring")[0].textContent;
+                responseElement.innerHTML = `<pre>${faultString}</pre>`;
+            }
+
+        } catch (error) {
+            responseElement.innerHTML = `${error.message}`;
+        }
+    });
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+        }
+    });
+</script>
+</body>>
+</html>
