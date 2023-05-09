@@ -5,34 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2becbcc0-385d-418c-84bb-e7d6177a9105" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/AppInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/MyMongoClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/config/JmsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/config/MongoConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/jms/CustomMessageConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/jms/CustomMessageProducer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/model/Benefit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/model/Member.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/services/BenefitsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/services/GlobalCustomException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/services/MemberService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/memberAccount.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/memberBenefits.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/visitorReports.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/wsdl/benefitsService.wsdl.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcherServlet-servlet.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +175,7 @@
       <workItem from="1683215895169" duration="14341000" />
       <workItem from="1683308727583" duration="27772000" />
       <workItem from="1683478848810" duration="33180000" />
-      <workItem from="1683567560466" duration="30423000" />
+      <workItem from="1683567560466" duration="30848000" />
     </task>
     <servers />
   </component>
