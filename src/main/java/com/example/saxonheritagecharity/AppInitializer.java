@@ -1,6 +1,6 @@
-package com.example.saxonheritage;
+package com.example.saxonheritagecharity;
 
-import com.example.saxonheritage.jms.CustomMessageReceiver;
+import com.example.saxonheritagecharity.jms.CustomMessageReceiver;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

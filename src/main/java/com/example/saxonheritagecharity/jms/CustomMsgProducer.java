@@ -1,6 +1,10 @@
-package com.example.saxonheritage.jms;
+// Agnijus Botyrius - 21466565
+// Distributed Systems (CP60060E) - Assignment
+// Project Title - Saxon Heritage Charity Application
 
-import com.example.saxonheritage.config.JmsConfiguration;
+package com.example.saxonheritagecharity.jms;
+
+import com.example.saxonheritagecharity.config.JmsConfiguration;
 
 import javax.jms.*;
 

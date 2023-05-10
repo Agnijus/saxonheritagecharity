@@ -96,7 +96,7 @@
             const memberId = document.getElementById("add-benefit-member-id").value;
             const benefit = document.getElementById("benefit-name").value;
 
-            const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+            const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritagecharity.example.com/">
     <soapenv:Header/>
     <soapenv:Body>
         <ser:addMemberBenefit>
@@ -138,7 +138,7 @@
         const memberId = document.getElementById("remove-benefit-member-id").value;
         const benefit = document.getElementById("remove-benefit-name").value;
 
-        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritagecharity.example.com/">
   <soapenv:Header/>
   <soapenv:Body>
       <ser:removeMemberBenefit>
@@ -159,7 +159,6 @@
             });
 
             const responseText = await response.text();
-            console.log(responseText); // Debug: Log the response text for debugging purposes
 
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(responseText, "text/xml");
@@ -183,7 +182,7 @@
         const memberId = document.getElementById("promotion-member-id").value;
         const promotion = document.getElementById("promotion").value;
 
-        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritagecharity.example.com/">
             <soapenv:Header/>
             <soapenv:Body>
                 <ser:sendPromotion>
@@ -226,7 +225,7 @@
         event.preventDefault();
         const memberId = document.getElementById("visitor-report-member-id").value;
 
-        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritagecharity.example.com/">
 <soapenv:Header/>
 <soapenv:Body>
     <ser:getVisitorReports>
@@ -283,7 +282,7 @@
         const memberId = document.getElementById("member-id").value;
         console.log(memberId)
 
-        const benefitsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+        const benefitsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritagecharity.example.com/">
     <soapenv:Header/>
     <soapenv:Body>
       <ser:getMemberBenefits>
@@ -291,7 +290,7 @@
       </ser:getMemberBenefits>
     </soapenv:Body>
   </soapenv:Envelope>`;
-        const promotionsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+        const promotionsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritagecharity.example.com/">
     <soapenv:Header/>
     <soapenv:Body>
       <ser:getPromotions>

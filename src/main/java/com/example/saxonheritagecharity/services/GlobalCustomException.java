@@ -1,4 +1,8 @@
-package com.example.saxonheritage.services;
+// Agnijus Botyrius - 21466565
+// Distributed Systems (CP60060E) - Assignment
+// Project Title - Saxon Heritage Charity Application
+
+package com.example.saxonheritagecharity.services;
 public class GlobalCustomException extends Exception {
     private int statusCode;
     private String message;

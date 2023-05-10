@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saxon Heritage</title>
+    <title>Saxon Heritage Charity</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -67,7 +67,7 @@
         const memberId = document.getElementById("member-id").value;
         console.log(memberId)
 
-        const benefitsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+        const benefitsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritagecharity.example.com/">
     <soapenv:Header/>
     <soapenv:Body>
       <ser:getMemberBenefits>
@@ -75,7 +75,7 @@
       </ser:getMemberBenefits>
     </soapenv:Body>
   </soapenv:Envelope>`;
-        const promotionsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+        const promotionsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritagecharity.example.com/">
     <soapenv:Header/>
     <soapenv:Body>
       <ser:getPromotions>

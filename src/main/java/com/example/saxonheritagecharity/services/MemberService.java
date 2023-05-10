@@ -1,4 +1,4 @@
-package com.example.saxonheritage.services;
+package com.example.saxonheritagecharity.services;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;

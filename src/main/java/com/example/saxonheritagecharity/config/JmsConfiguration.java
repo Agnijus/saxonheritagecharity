@@ -1,5 +1,9 @@
-// JMS configuration class for Saxon Heritage
-package com.example.saxonheritage.config;
+// Agnijus Botyrius - 21466565
+// Distributed Systems (CP60060E) - Assignment
+// Project Title - Saxon Heritage Charity Application
+
+// JMS configuration class for Saxon Heritage Charity
+package com.example.saxonheritagecharity.config;
 
 import javax.jms.ConnectionFactory;
 import org.apache.activemq.ActiveMQConnectionFactory;

@@ -1,8 +1,8 @@
-// MongoDB configuration class for Saxon Heritage
-package com.example.saxonheritage.config;
+// MongoDB configuration class for Saxon Heritage Charity
+package com.example.saxonheritagecharity.config;
 
-import com.example.saxonheritage.MyMongoClient;
-import com.example.saxonheritage.services.MemberServiceImplementation;
+import com.example.saxonheritagecharity.MyMongoClient;
+import com.example.saxonheritagecharity.services.MemberServiceImplementation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,9 +1,10 @@
-package com.example.saxonheritage;
+// Agnijus Botyrius - 21466565
+// Distributed Systems (CP60060E) - Assignment
+// Project Title - Saxon Heritage Charity Application
 
-import com.example.saxonheritage.model.Member;
-import com.example.saxonheritage.services.GlobalCustomException;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
+package com.example.saxonheritagecharity;
+
+import com.example.saxonheritagecharity.services.GlobalCustomException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
@@ -12,17 +13,14 @@ import com.mongodb.client.model.Updates;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
-import com.google.gson.Gson;
 
 @Component
 public class MyMongoClient {
 
     private final MongoClient mongoClient;
-    private static final String DATABASE_NAME = "SaxonHeritageApp";
+    private static final String DATABASE_NAME = "SaxonHeritageCharity";
 
     // Constructor for creating a new instance of MyMongoClient class.
     public MyMongoClient(MongoClient mongoClient) {
@@ -62,7 +60,7 @@ public class MyMongoClient {
     }
     public void insertPromotion(String memberId, String promotion) throws GlobalCustomException {
         // Get the member and promotions collection from the MongoDB client
-        MongoCollection<Document> memberCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection("memberService");
+        MongoCollection<Document> memberCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection("memberAccount");
         MongoCollection<Document> promotionsCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection("memberPromotions");
 
         // Convert the member ID string to an ObjectId
@@ -102,7 +100,7 @@ public class MyMongoClient {
 
     // Method for inserting visitor reports for a member.
     public void insertVisitorReports(String memberId, List<String> visitorReports) throws GlobalCustomException {
-        MongoCollection<Document> memberCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection("memberService");
+        MongoCollection<Document> memberCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection("memberAccount");
         MongoCollection<Document> visitorReportsCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection("visitorReports");
 
         ObjectId objectId;

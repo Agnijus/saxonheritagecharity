@@ -1,8 +1,12 @@
-package com.example.saxonheritage.jms;
+// Agnijus Botyrius - 21466565
+// Distributed Systems (CP60060E) - Assignment
+// Project Title - Saxon Heritage Charity Application
 
-import com.example.saxonheritage.MyMongoClient;
-import com.example.saxonheritage.config.JmsConfiguration;
-import com.example.saxonheritage.services.GlobalCustomException;
+package com.example.saxonheritagecharity.jms;
+
+import com.example.saxonheritagecharity.MyMongoClient;
+import com.example.saxonheritagecharity.config.JmsConfiguration;
+import com.example.saxonheritagecharity.services.GlobalCustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,11 +1,13 @@
-package com.example.saxonheritage;
+// Agnijus Botyrius - 21466565
+// Distributed Systems (CP60060E) - Assignment
+// Project Title - Saxon Heritage Charity Application
+
+package com.example.saxonheritagecharity;
 
 
-import com.example.saxonheritage.jms.CustomMessageReceiver;
-import com.example.saxonheritage.services.BenefitsService;
-import com.example.saxonheritage.services.MemberServiceImplementation;
-import com.example.saxonheritage.services.BenefitsServiceImplementation;
-import com.example.saxonheritage.MyMongoClient;
+import com.example.saxonheritagecharity.jms.CustomMessageReceiver;
+import com.example.saxonheritagecharity.services.BenefitsService;
+import com.example.saxonheritagecharity.services.MemberServiceImplementation;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
@@ -17,24 +19,21 @@ import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.transport.servlet.CXFServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import javax.jms.JMSException;
+
 import javax.xml.ws.Endpoint;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import java.util.Arrays;
 
 @SpringBootApplication
-@ComponentScan({"com.example.saxonheritage", "com.example.saxonheritage.config"})
-public class SaxonHeritageApp implements WebMvcConfigurer {
+@ComponentScan({"com.example.saxonheritagecharity", "com.example.saxonheritagecharity.config"})
+public class SaxonHeritageCharity implements WebMvcConfigurer {
 
     // Read MongoDB credentials from application.properties
     @Value("${mongo.uri}")
@@ -56,7 +55,7 @@ public class SaxonHeritageApp implements WebMvcConfigurer {
 
     // Main method to run the Spring Boot application
     public static void main(String[] args) {
-        SpringApplication.run(SaxonHeritageApp.class, args);
+        SpringApplication.run(SaxonHeritageCharity.class, args);
     }
 
     // Create a MongoDB client with the given credentials
@@ -64,7 +63,7 @@ public class SaxonHeritageApp implements WebMvcConfigurer {
     public MongoClient mongoClient() {
         MongoCredential credential = MongoCredential.createScramSha1Credential(
                 "dbUser",
-                "SaxonHeritageApp",
+                "SaxonHeritageCharity",
                 "dbUser".toCharArray()
         );
 
@@ -109,7 +108,7 @@ public class SaxonHeritageApp implements WebMvcConfigurer {
         return endpoint;
     }
 
-    // Create a bean for CustomMessageConsumer that listens to the ActiveMQ queue for incoming messages
+    // Create a bean for CustomMessageReceiver that listens to the ActiveMQ queue for incoming messages
     // and interacts with the Mongo database to insert visitor reports and member promotions
     @Bean
     public CustomMessageReceiver customMessageReceiver(@Autowired MyMongoClient myMongoClient) {

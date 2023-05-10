@@ -1,4 +1,4 @@
-package com.example.saxonheritage.model;
+package com.example.saxonheritagecharity.model;
 import org.bson.types.ObjectId;
 
 public class Benefit {

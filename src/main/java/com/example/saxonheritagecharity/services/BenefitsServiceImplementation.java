@@ -1,8 +1,12 @@
-package com.example.saxonheritage.services;
+// Agnijus Botyrius - 21466565
+// Distributed Systems (CP60060E) - Assignment
+// Project Title - Saxon Heritage Charity Application
 
-import com.example.saxonheritage.jms.CustomMsgProducer;
-import com.example.saxonheritage.jms.CustomMessageReceiver;
-import com.example.saxonheritage.MyMongoClient;
+package com.example.saxonheritagecharity.services;
+
+import com.example.saxonheritagecharity.jms.CustomMsgProducer;
+import com.example.saxonheritagecharity.jms.CustomMessageReceiver;
+import com.example.saxonheritagecharity.MyMongoClient;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +36,7 @@ public class BenefitsServiceImplementation implements BenefitsService {
         try {
             // Convert memberId to ObjectId and find the member document in the database
             ObjectId memberIdObj = new ObjectId(memberId);
-            Document memberDoc = myMongoClient.findDocumentById(memberId, "memberService");
+            Document memberDoc = myMongoClient.findDocumentById(memberId, "memberAccount");
 
             // Check if the member exists
             if (memberDoc != null) {
@@ -73,7 +77,7 @@ public class BenefitsServiceImplementation implements BenefitsService {
         try {
             // Find the member in the database
             ObjectId memberIdObj = new ObjectId(memberId);
-            Document memberDoc = myMongoClient.findDocumentById(memberId, "memberService");
+            Document memberDoc = myMongoClient.findDocumentById(memberId, "memberAccount");
 
             // Check if the member exists
             if (memberDoc != null) {
@@ -114,7 +118,7 @@ public class BenefitsServiceImplementation implements BenefitsService {
     public List<String> getMemberBenefits(String memberId) throws GlobalCustomException {
 
         // Find the member in the database
-        Document member = myMongoClient.findDocumentById(memberId, "memberService");
+        Document member = myMongoClient.findDocumentById(memberId, "memberAccount");
 
         // Check if the member exists
         if (member == null) {

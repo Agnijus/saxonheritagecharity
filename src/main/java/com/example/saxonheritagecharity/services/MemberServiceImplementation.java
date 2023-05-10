@@ -1,9 +1,9 @@
-package com.example.saxonheritage.services;
+package com.example.saxonheritagecharity.services;
 
-import com.example.saxonheritage.jms.CustomMessageReceiver;
-import com.example.saxonheritage.jms.CustomMsgProducer;
-import com.example.saxonheritage.model.Member;
-import com.example.saxonheritage.MyMongoClient;
+import com.example.saxonheritagecharity.jms.CustomMessageReceiver;
+import com.example.saxonheritagecharity.jms.CustomMsgProducer;
+import com.example.saxonheritagecharity.model.Member;
+import com.example.saxonheritagecharity.MyMongoClient;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -12,7 +12,7 @@ import javax.jws.WebService;
 import java.util.List;
 
 // This annotation tells the framework that this is a web service and specifies the interface to use for requests.
-@WebService(endpointInterface = "com.example.saxonheritage.services.MemberService")
+@WebService(endpointInterface = "com.example.saxonheritagecharity.services.MemberService")
 public class MemberServiceImplementation implements MemberService {
 
     private MyMongoClient myMongoClient;
@@ -39,7 +39,7 @@ public class MemberServiceImplementation implements MemberService {
                 .append("name", newMember.getName())
                 .append("email", newMember.getEmail());
         // Insert the document into the MongoDB collection for members.
-        myMongoClient.insertDocument(memberDoc, "memberService");
+        myMongoClient.insertDocument(memberDoc, "memberAccount");
         // Print the document to the console for debugging purposes.
         System.out.println(memberDoc);
         // Return a success message with the new member's ID.
@@ -50,11 +50,11 @@ public class MemberServiceImplementation implements MemberService {
     @Override
     public String updateMemberDetails(String memberId, String email) {
         // Find the existing member document in the MongoDB collection for members.
-        Document existingMember = myMongoClient.findDocumentById(memberId, "memberService");
+        Document existingMember = myMongoClient.findDocumentById(memberId, "memberAccount");
 
         // If the member exists, update their email address in the document.
         if (existingMember != null) {
-            myMongoClient.updateDocumentById(memberId, "email", email, "memberService");
+            myMongoClient.updateDocumentById(memberId, "email", email, "memberAccount");
             return "Member details updated successfully";
         } else {
             // If the member does not exist, return an error message.
@@ -63,11 +63,10 @@ public class MemberServiceImplementation implements MemberService {
     }
 
     // This method retrieves the membership information for a member with the given ID.
-    // This method retrieves the membership information for a member with the given ID.
     @Override
     public String getMembershipInfo(String memberId) {
         // Find the existing member document in the MongoDB collection for members.
-        Document existingMember = myMongoClient.findDocumentById(memberId, "memberService");
+        Document existingMember = myMongoClient.findDocumentById(memberId, "memberAccount");
 
         // If the member exists, return their name, email, and ID as a string.
         if (existingMember != null) {
@@ -127,7 +126,7 @@ public class MemberServiceImplementation implements MemberService {
     @Override
     public List<String> getVisitorReports(String memberId) throws GlobalCustomException {
         // Find the existing member document in the MongoDB collection for members.
-        Document member = myMongoClient.findDocumentById(memberId, "memberService");
+        Document member = myMongoClient.findDocumentById(memberId, "memberAccount");
 
         // If the member does not exist, throw a GlobalCustomException with a 404 status code.
         if (member == null) {
@@ -158,7 +157,7 @@ public class MemberServiceImplementation implements MemberService {
     @Override
     public List<String> getPromotions(String memberId) throws GlobalCustomException {
     // Find the existing member document in the MongoDB collection for members.
-        Document member = myMongoClient.findDocumentById(memberId, "memberService");
+        Document member = myMongoClient.findDocumentById(memberId, "memberAccount");
         // If the member does not exist, throw an exception with a 404 status code.
         if (member == null) {
             throw new GlobalCustomException("Member not found.", 404);
