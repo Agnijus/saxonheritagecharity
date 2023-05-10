@@ -4,33 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2becbcc0-385d-418c-84bb-e7d6177a9105" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/AppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/MyMongoClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/MyMongoClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/SaxonHeritageApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/SaxonHeritageCharity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/config/JmsConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/config/JmsConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/config/MongoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/config/MongoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/jms/CustomMessageReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/jms/CustomMessageReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/jms/CustomMsgProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/jms/CustomMsgProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/model/Benefit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/model/Benefit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/model/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/services/BenefitsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/services/BenefitsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/services/BenefitsServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/services/BenefitsServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/services/GlobalCustomException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/services/GlobalCustomException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/services/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/services/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/saxonheritage/services/MemberServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/saxonheritagecharity/services/MemberServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/memberAccount.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/memberAccount.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/memberAdmin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/memberAdmin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/memberBenefits.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/memberBenefits.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/visitorReports.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/visitorReports.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/wsdl/benefitsService.wsdl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/wsdl/benefitsService.wsdl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/wsdl/memberService.wsdl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/wsdl/memberService.wsdl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcherServlet-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcherServlet-servlet.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2becbcc0-385d-418c-84bb-e7d6177a9105" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -209,7 +183,7 @@
       <workItem from="1683567560466" duration="44046000" />
       <workItem from="1683720679405" duration="1028000" />
       <workItem from="1683721746771" duration="214000" />
-      <workItem from="1683721984805" duration="13235000" />
+      <workItem from="1683721984805" duration="14029000" />
     </task>
     <servers />
   </component>
