@@ -11,13 +11,13 @@ import javax.jws.soap.SOAPBinding;
 public interface BenefitsService {
 
     @WebMethod
-    void addBenefit(
+    void addMemberBenefit(
             @WebParam(name = "memberId") String memberId,
             @WebParam(name = "benefit") String benefit
     ) throws GlobalCustomException;
 
     @WebMethod
-    void removeBenefit(
+    void removeMemberBenefit(
             @WebParam(name = "memberId") String memberId,
             @WebParam(name = "benefit") String benefit
     ) throws GlobalCustomException;

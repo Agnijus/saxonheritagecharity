@@ -99,10 +99,10 @@
             const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
     <soapenv:Header/>
     <soapenv:Body>
-        <ser:addBenefit>
+        <ser:addMemberBenefit>
             <ser:memberId>${memberId}</ser:memberId>
             <ser:benefit>${benefit}</ser:benefit>
-        </ser:addBenefit>
+        </ser:addMemberBenefit>
     </soapenv:Body>
     </soapenv:Envelope>`;
 
@@ -133,45 +133,49 @@
 
 
     // Member Remove Benefit
-        document.getElementById("remove-benefit-form").addEventListener("submit", async (event) => {
-            event.preventDefault();
-            const memberId = document.getElementById("remove-benefit-member-id").value;
-            const benefit = document.getElementById("remove-benefit-name").value;
+    document.getElementById("remove-benefit-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const memberId = document.getElementById("remove-benefit-member-id").value;
+        const benefit = document.getElementById("remove-benefit-name").value;
 
-            const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
-    <soapenv:Header/>
-    <soapenv:Body>
-        <ser:removeBenefit>
-            <ser:memberId>${memberId}</ser:memberId>
-            <ser:benefit>${benefit}</ser:benefit>
-        </ser:removeBenefit>
-    </soapenv:Body>
-    </soapenv:Envelope>`;
+        const requestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+  <soapenv:Header/>
+  <soapenv:Body>
+      <ser:removeMemberBenefit>
+          <ser:memberId>${memberId}</ser:memberId>
+          <ser:benefit>${benefit}</ser:benefit>
+      </ser:removeMemberBenefit>
+  </soapenv:Body>
+  </soapenv:Envelope>`;
 
-            const responseElement = document.getElementById("remove-benefit-result");
-            try {
-                const response = await fetch("/soap-api/benefitsService", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "text/xml"
-                    },
-                    body: requestBody
-                });
+        const responseElement = document.getElementById("remove-benefit-result");
+        try {
+            const response = await fetch("/soap-api/benefitsService", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/xml"
+                },
+                body: requestBody
+            });
 
-                const responseText = await response.text();
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(responseText, "text/xml");
+            const responseText = await response.text();
+            console.log(responseText); // Debug: Log the response text for debugging purposes
 
-                if (response.ok) {
-                    responseElement.textContent = "Benefit removed successfully.";
-                } else {
-                    const faultString = xmlDoc.getElementsByTagName("faultstring")[0].textContent;
-                    responseElement.textContent = faultString;
-                }
-            } catch (error) {
-                responseElement.textContent = `${error.message}`;
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(responseText, "text/xml");
+
+            if (response.ok) {
+                responseElement.textContent = "Benefit removed successfully.";
+            } else {
+                const faultString = xmlDoc.getElementsByTagName("faultstring")[0].textContent;
+                console.log(faultString); // Debug: Log the fault string for debugging purposes
+                responseElement.textContent = faultString;
             }
-        });
+        } catch (error) {
+            responseElement.textContent = `${error.message}`;
+        }
+    });
+
 
     // Member Add Promotion
     document.getElementById("promotion-form").addEventListener("submit", async (event) => {
@@ -265,14 +269,6 @@
             responseElement.innerHTML = `${error.message}`;
         }
     });
-    const currentPage = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-            link.classList.add('active');
-        }
-    });
 
     const currentPage = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
@@ -281,6 +277,97 @@
             link.classList.add('active');
         }
     });
+    // Get Member Benefits and Promotions
+    document.getElementById("get-benefits-promotions-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const memberId = document.getElementById("member-id").value;
+        console.log(memberId)
+
+        const benefitsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+    <soapenv:Header/>
+    <soapenv:Body>
+      <ser:getMemberBenefits>
+        <ser:memberId>${memberId}</ser:memberId>
+      </ser:getMemberBenefits>
+    </soapenv:Body>
+  </soapenv:Envelope>`;
+        const promotionsRequestBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.saxonheritage.example.com/">
+    <soapenv:Header/>
+    <soapenv:Body>
+      <ser:getPromotions>
+        <arg0>${memberId}</arg0>
+      </ser:getPromotions>
+    </soapenv:Body>
+  </soapenv:Envelope>`;
+
+        const benefitsResponseElement = document.getElementById("get-benefits-result");
+        const promotionsResponseElement = document.getElementById("promotions-result");
+
+        async function handleResponse(response, responseElement, headerElement) {
+            const responseText = await response.text();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(responseText, "text/xml");
+
+            if (response.ok) {
+                const items = xmlDoc.getElementsByTagName("item");
+                if (items.length > 0) {
+                    headerElement.style.display = "block";
+                    let result = "<ul>";
+                    for (let i = 0; i < items.length; i++) {
+                        let itemText = items[i].textContent.trim();
+                        if (itemText !== "") {
+                            result += `<li>${itemText}</li>`;
+                        }
+                    }
+                    result += "</ul>";
+                    responseElement.innerHTML = result;
+                } else {
+                    headerElement.style.display = "none";
+                    responseElement.innerHTML = "";
+                }
+            } else {
+                const faultString = xmlDoc.getElementsByTagName("faultstring")[0].textContent;
+                const customException = new GlobalCustomException(faultString, response.status);
+                responseElement.innerHTML = `<pre>${customException.message} (Status code: ${customException.statusCode})</pre>`;
+            }
+        }
+
+        try {
+            const benefitsHeaderElement = document.createElement("h2");
+            benefitsHeaderElement.textContent = "You have the following benefits:";
+            benefitsHeaderElement.style.display = "none";
+            benefitsResponseElement.insertAdjacentElement("beforebegin", benefitsHeaderElement);
+
+            const benefitsResponse = await fetch("/soap-api/benefitsService", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/xml",
+                },
+                body: benefitsRequestBody,
+            });
+
+            await handleResponse(benefitsResponse, benefitsResponseElement, benefitsHeaderElement);
+
+            const promotionsHeaderElement = document.createElement("h2");
+            promotionsHeaderElement.textContent = "You have the following promotions:";
+            promotionsHeaderElement.style.display = "none";
+            promotionsResponseElement.insertAdjacentElement("beforebegin", promotionsHeaderElement);
+
+            const promotionsResponse = await fetch("/soap-api/memberService", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/xml",
+                },
+                body: promotionsRequestBody,
+            });
+
+            await handleResponse(promotionsResponse, promotionsResponseElement, promotionsHeaderElement);
+        } catch (error) {
+            benefitsResponseElement.innerHTML = `${error.message}`;
+            promotionsResponseElement.innerHTML = `${error.message}`;
+        }
+    });
+
 </script>
 </body>
 </html>

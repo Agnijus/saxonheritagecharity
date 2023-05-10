@@ -1,4 +1,4 @@
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.saxonheritage.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://jaxb.dev.java.net/array" name="BenefitsServiceImplService" targetNamespace="http://services.saxonheritage.example.com/">
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.saxonheritage.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://jaxb.dev.java.net/array" name="BenefitsServiceImplementationService" targetNamespace="http://services.saxonheritage.example.com/">
     <wsdl:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://jaxb.dev.java.net/array" version="1.0">
             <xs:complexType final="#all" name="stringArray">
@@ -7,56 +7,77 @@
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.saxonheritage.example.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.saxonheritage.example.com/">
+            <xsd:element name="GlobalCustomException" type="tns:GlobalCustomException"/>
+            <xsd:complexType name="GlobalCustomException">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="statusCode" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
     </wsdl:types>
-    <wsdl:message name="removeBenefit">
-        <wsdl:part name="memberId" type="xsd:int"> </wsdl:part>
-        <wsdl:part name="benefit" type="xsd:string"> </wsdl:part>
-    </wsdl:message>
+    <wsdl:message name="addMemberBenefitResponse"> </wsdl:message>
     <wsdl:message name="getMemberBenefitsResponse">
         <wsdl:part name="return" type="ns1:stringArray"> </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="getMemberBenefits">
-        <wsdl:part name="memberId" type="xsd:int"> </wsdl:part>
-    </wsdl:message>
-    <wsdl:message name="addBenefit">
-        <wsdl:part name="memberId" type="xsd:int"> </wsdl:part>
+    <wsdl:message name="removeMemberBenefitResponse"> </wsdl:message>
+    <wsdl:message name="addMemberBenefit">
+        <wsdl:part name="memberId" type="xsd:string"> </wsdl:part>
         <wsdl:part name="benefit" type="xsd:string"> </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="removeBenefitResponse"> </wsdl:message>
-    <wsdl:message name="addBenefitResponse"> </wsdl:message>
+    <wsdl:message name="getMemberBenefits">
+        <wsdl:part name="memberId" type="xsd:string"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GlobalCustomException">
+        <wsdl:part element="tns:GlobalCustomException" name="GlobalCustomException"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removeMemberBenefit">
+        <wsdl:part name="memberId" type="xsd:string"> </wsdl:part>
+        <wsdl:part name="benefit" type="xsd:string"> </wsdl:part>
+    </wsdl:message>
     <wsdl:portType name="BenefitsService">
-        <wsdl:operation name="addBenefit">
-            <wsdl:input message="tns:addBenefit" name="addBenefit"> </wsdl:input>
-            <wsdl:output message="tns:addBenefitResponse" name="addBenefitResponse"> </wsdl:output>
+        <wsdl:operation name="removeMemberBenefit">
+            <wsdl:input message="tns:removeMemberBenefit" name="removeMemberBenefit"> </wsdl:input>
+            <wsdl:output message="tns:removeMemberBenefitResponse" name="removeMemberBenefitResponse"> </wsdl:output>
+            <wsdl:fault message="tns:GlobalCustomException" name="GlobalCustomException"> </wsdl:fault>
         </wsdl:operation>
-        <wsdl:operation name="removeBenefit">
-            <wsdl:input message="tns:removeBenefit" name="removeBenefit"> </wsdl:input>
-            <wsdl:output message="tns:removeBenefitResponse" name="removeBenefitResponse"> </wsdl:output>
+        <wsdl:operation name="addMemberBenefit">
+            <wsdl:input message="tns:addMemberBenefit" name="addMemberBenefit"> </wsdl:input>
+            <wsdl:output message="tns:addMemberBenefitResponse" name="addMemberBenefitResponse"> </wsdl:output>
+            <wsdl:fault message="tns:GlobalCustomException" name="GlobalCustomException"> </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="getMemberBenefits">
             <wsdl:input message="tns:getMemberBenefits" name="getMemberBenefits"> </wsdl:input>
             <wsdl:output message="tns:getMemberBenefitsResponse" name="getMemberBenefitsResponse"> </wsdl:output>
+            <wsdl:fault message="tns:GlobalCustomException" name="GlobalCustomException"> </wsdl:fault>
         </wsdl:operation>
     </wsdl:portType>
-    <wsdl:binding name="BenefitsServiceImplServiceSoapBinding" type="tns:BenefitsService">
+    <wsdl:binding name="BenefitsServiceImplementationServiceSoapBinding" type="tns:BenefitsService">
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <wsdl:operation name="addBenefit">
+        <wsdl:operation name="removeMemberBenefit">
             <soap:operation soapAction="" style="rpc"/>
-            <wsdl:input name="addBenefit">
+            <wsdl:input name="removeMemberBenefit">
                 <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
             </wsdl:input>
-            <wsdl:output name="addBenefitResponse">
+            <wsdl:output name="removeMemberBenefitResponse">
                 <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="GlobalCustomException">
+                <soap:fault name="GlobalCustomException" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
-        <wsdl:operation name="removeBenefit">
+        <wsdl:operation name="addMemberBenefit">
             <soap:operation soapAction="" style="rpc"/>
-            <wsdl:input name="removeBenefit">
+            <wsdl:input name="addMemberBenefit">
                 <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
             </wsdl:input>
-            <wsdl:output name="removeBenefitResponse">
+            <wsdl:output name="addMemberBenefitResponse">
                 <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="GlobalCustomException">
+                <soap:fault name="GlobalCustomException" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="getMemberBenefits">
             <soap:operation soapAction="" style="rpc"/>
@@ -66,10 +87,13 @@
             <wsdl:output name="getMemberBenefitsResponse">
                 <soap:body namespace="http://services.saxonheritage.example.com/" use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="GlobalCustomException">
+                <soap:fault name="GlobalCustomException" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="BenefitsServiceImplService">
-        <wsdl:port binding="tns:BenefitsServiceImplServiceSoapBinding" name="BenefitsServiceImplPort">
+    <wsdl:service name="BenefitsServiceImplementationService">
+        <wsdl:port binding="tns:BenefitsServiceImplementationServiceSoapBinding" name="BenefitsServiceImplementationPort">
             <soap:address location="http://localhost:8080/soap-api/benefitsService"/>
         </wsdl:port>
     </wsdl:service>

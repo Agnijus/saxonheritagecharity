@@ -1,7 +1,7 @@
 package com.example.saxonheritage.jms;
 
 import com.example.saxonheritage.MyMongoClient;
-import com.example.saxonheritage.config.JmsConfig;
+import com.example.saxonheritage.config.JmsConfiguration;
 import com.example.saxonheritage.services.GlobalCustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,14 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
-public class CustomMessageConsumer {
+public class CustomMessageReceiver {
 
-    private ConnectionFactory connectionFactory;
+    private ConnectionFactory jmsConnectionFactory;
     private Queue visitorReportsQueue;
     private Queue promotionsQueue;
     private Queue benefitsQueue;
@@ -29,19 +26,19 @@ public class CustomMessageConsumer {
     @Autowired
     private MyMongoClient myMongoClient;
 
-
-    public CustomMessageConsumer(MyMongoClient myMongoClient) {
-        this.connectionFactory = JmsConfig.getConnectionFactory();
+    // Constructor with injected MongoDB client
+    public CustomMessageReceiver(MyMongoClient myMongoClient) {
+        this.jmsConnectionFactory = JmsConfiguration.getJmsConnectionFactory();
         this.receivedPromotions = new ArrayList<>();
         this.receivedVisitorReports = new HashMap<>();
     }
 
-
-
-    public List<String> getReceivedPromotions() {
+    // Returns a copy of the received promotions list
+    public List<String> obtainReceivedPromotions() {
         return new ArrayList<>(receivedPromotions);
     }
 
+    // Returns a copy of the received visitor reports for a given member ID
     public List<String> getReceivedVisitorReports(String memberId) {
         List<String> reports = receivedVisitorReports.get(memberId);
         if (reports != null) {
@@ -51,7 +48,8 @@ public class CustomMessageConsumer {
         }
     }
 
-    public void init() {
+    // Initializes the message consumer by starting to listen to different queues
+    public void initializeReceiver() {
         try {
             startListeningToVisitorReports();
             startListeningToPromotions();
@@ -62,9 +60,9 @@ public class CustomMessageConsumer {
         }
     }
 
-
+    // Starts listening to visitor reports queue
     public void startListeningToVisitorReports() throws JMSException {
-        Connection connection = connectionFactory.createConnection();
+        Connection connection = jmsConnectionFactory.createConnection();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
         visitorReportsQueue = session.createQueue("visitorReports");
@@ -93,8 +91,9 @@ public class CustomMessageConsumer {
         connection.start();
     }
 
+    // Starts listening to promotions queue
     public void startListeningToPromotions() throws JMSException {
-        Connection connection = connectionFactory.createConnection();
+        Connection connection = jmsConnectionFactory.createConnection();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
         promotionsQueue = session.createQueue("promotions");
@@ -120,9 +119,9 @@ public class CustomMessageConsumer {
         connection.start();
     }
 
-
+    // Starts listening to benefits queue
     public void startListeningToBenefits() throws JMSException {
-        Connection connection = connectionFactory.createConnection();
+        Connection connection = jmsConnectionFactory.createConnection();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
         benefitsQueue = session.createQueue("benefits");
@@ -163,7 +162,5 @@ public class CustomMessageConsumer {
 
         connection.start();
     }
-
-
-
 }
+
