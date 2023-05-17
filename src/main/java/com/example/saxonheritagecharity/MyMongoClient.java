@@ -22,12 +22,10 @@ public class MyMongoClient {
     private final MongoClient mongoClient;
     private static final String DATABASE_NAME = "SaxonHeritageCharity";
 
-    // Constructor for creating a new instance of MyMongoClient class.
     public MyMongoClient(MongoClient mongoClient) {
         this.mongoClient = mongoClient;
     }
 
-    // Method for inserting a document in the specified collection.
     public void insertDocument(Document document, String collection) {
         MongoCollection<Document> myCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection(collection);
         myCollection.insertOne(document);

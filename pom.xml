@@ -20,13 +20,11 @@
     <java.version>17</java.version>
   </properties>
   <dependencies>
-  <!-- Your dependencies go here -->
   <dependency>
     <groupId>javax.jws</groupId>
     <artifactId>javax.jws-api</artifactId>
     <version>1.1</version>
   </dependency>
-  <!-- Spring Boot and related dependencies -->
   <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
